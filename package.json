@@ -1,0 +1,67 @@
+{
+	"name": "waybox-authentication",
+	"version": "1.0.0",
+	"description": "waybox-authentication",
+	"main": "build/src/server.js",
+	"scripts": {
+		"build": "tsc",
+		"start": "pm2-runtime start ecosystem.config.js --env production",
+		"dev": "nodemon ./src/server.ts --legacy-watch --ignore node_modules/",
+		"typedoc": "typedoc --out docs ./src"
+	},
+	"engines": {
+		"node": "v14.15.4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lamnguyencse17/waybox-sideserver.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/lamnguyencse17/waybox-sideserver/issues"
+	},
+	"homepage": "https://github.com/lamnguyencse17/waybox-sideserver#readme",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"bcrypt": "^5.0.1",
+		"body-parser": "^1.19.0",
+		"compression": "^1.7.4",
+		"cookie-parser": "^1.4.5",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"lodash": "^4.17.20",
+		"mongoose": "^5.12.2",
+		"passport": "^0.4.1",
+		"passport-jwt": "^4.0.0",
+		"pm2": "^4.5.4",
+		"redis": "^3.0.2",
+		"yup": "^0.32.9"
+	},
+	"devDependencies": {
+		"@types/bcrypt": "^3.0.0",
+		"@types/cors": "^2.8.10",
+		"@types/eslint-config-prettier": "^6.11.0",
+		"@types/express": "^4.17.11",
+		"@types/jsonwebtoken": "^8.5.1",
+		"@types/morgan": "^1.9.2",
+		"@types/node": "^14.14.37",
+		"@types/passport": "^1.0.6",
+		"@types/passport-jwt": "^3.0.5",
+		"@types/redis": "^2.8.28",
+		"@typescript-eslint/eslint-plugin": "^4.20.0",
+		"@typescript-eslint/parser": "^4.20.0",
+		"eslint": "^7.23.0",
+		"eslint-config-prettier": "^7.2.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.7",
+		"prettier": "^2.2.1",
+		"ts-node": "^9.1.1",
+		"typedoc": "^0.20.34",
+		"typescript": "^4.2.3"
+	}
+}
