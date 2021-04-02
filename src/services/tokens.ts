@@ -47,3 +47,5 @@ export const generateRegisterToken = async (
 	console.log("SAVED TOKEN: ", otpToken);
 	return { otpToken };
 };
+
+export const generateLoginToken = generateRegisterToken;
