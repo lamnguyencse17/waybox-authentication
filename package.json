@@ -35,6 +35,7 @@
 		"jsonwebtoken": "^8.5.1",
 		"lodash": "^4.17.20",
 		"mongoose": "^5.12.2",
+		"nanoid": "^3.1.22",
 		"passport": "^0.4.1",
 		"passport-jwt": "^4.0.0",
 		"pm2": "^4.5.4",

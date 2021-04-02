@@ -5,7 +5,9 @@ const TokenSchema: Schema = new Schema({
 	accessToken: { type: String },
 	refreshToken: { type: String },
 	otpToken: { type: String },
-	otp: { type: String },
+	otpCode: { type: String },
+	otpRandom: { type: String },
+	phoneNumber: { type: String, required: true },
 });
 
 TokenSchema.index({ phone: 1 }, { unique: true });

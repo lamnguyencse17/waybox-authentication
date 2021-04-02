@@ -1,6 +1,7 @@
 import express from "express";
 import mainRouter from "./routers/router";
 import { initMongoose } from "./init";
+import { generateRegisterTokens } from "./services/tokens";
 import cors from "cors";
 import http from "http";
 
@@ -22,4 +23,7 @@ app.use(
 
 app.use("/", mainRouter);
 
-server.listen(port, () => console.log("Running"));
+server.listen(port, async () => {
+	console.log("Running");
+	await generateRegisterToken("0919696148");
+});
