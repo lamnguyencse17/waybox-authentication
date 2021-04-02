@@ -10,6 +10,6 @@ const TokenSchema: Schema = new Schema({
 	phoneNumber: { type: String, required: true },
 });
 
-TokenSchema.index({ phone: 1 }, { unique: true });
+TokenSchema.index({ phoneNumber: 1 }, { unique: true });
 
 export default mongoose.model<IToken>("Token", TokenSchema);

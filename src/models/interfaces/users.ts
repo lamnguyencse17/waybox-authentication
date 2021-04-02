@@ -4,7 +4,7 @@ export interface IUser extends Document {
 	phoneNumber: string;
 	email: string;
 	password: string;
-	dateOfBirth: Date;
+	dateOfBirth: string;
 	firstName: string;
 	lastName: string;
 	female: boolean;
@@ -15,7 +15,7 @@ export interface IPlainUser {
 	phoneNumber: string;
 	email: string;
 	password: string;
-	dateOfBirth: Date;
+	dateOfBirth: string;
 	firstName: string;
 	lastName: string;
 	female: boolean;

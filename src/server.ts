@@ -1,7 +1,7 @@
 import express from "express";
 import mainRouter from "./routers/router";
 import { initMongoose } from "./init";
-import { generateRegisterTokens } from "./services/tokens";
+import { generateRegisterToken } from "./services/tokens";
 import cors from "cors";
 import http from "http";
 

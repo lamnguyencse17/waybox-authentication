@@ -16,7 +16,7 @@ export interface registerInput
 	extends yup.Asserts<typeof registerInputSchema> {}
 
 export const registerInputSchema = yup.object({
-	phoneNumber: yup.string().required().defined().min(8),
+	phoneNumber: yup.string().required().defined().min(10),
 	email: yup.string().email().required().defined(),
 	password: yup
 		.string()
