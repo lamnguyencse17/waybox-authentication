@@ -25,5 +25,4 @@ app.use("/", mainRouter);
 
 server.listen(port, async () => {
 	console.log("Running");
-	await generateRegisterToken("0919696148");
 });
