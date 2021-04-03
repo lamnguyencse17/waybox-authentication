@@ -37,3 +37,16 @@ export interface IRefreshCheck {
 	phoneNumber: string;
 	refreshToken: string;
 }
+
+export type IAccessPayload = yup.Asserts<typeof accessPayloadSchema>;
+
+export const accessPayloadSchema = yup.object({
+	USER_ID: yup.string().required().defined().min(10),
+	IS_ACCESS_TOKEN: yup.boolean().required("IS NOT REFRESH TOKEN").defined(),
+	exp: yup.number().required().defined(),
+});
+
+export interface IAccessCheck {
+	phoneNumber: string;
+	accessToken: string;
+}

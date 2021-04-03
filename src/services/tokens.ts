@@ -8,8 +8,12 @@ import {
 	IRefreshPayload,
 	RefreshPayloadSchema,
 	IRefreshCheck,
+	IAccessPayload,
+	accessPayloadSchema,
+	IAccessCheck,
 } from "./interfaces/tokens";
 import jwt from "jsonwebtoken";
+import { IToken } from "../models/interfaces/tokens";
 
 const generateRandomOtpText = async (): Promise<string> => await nanoid();
 
@@ -86,9 +90,13 @@ const generateRefreshToken = (phoneNumber: string): string => {
 export const verifyOtpToken = async (
 	otpInput: IOtpCheck
 ): Promise<IOtpReturnedTokens> => {
-	const { phoneNumber } = otpInput;
-	const tokenResult = await TokenModel.findOne(otpInput);
-	console.log(tokenResult);
+	const { phoneNumber, otpCode } = otpInput;
+	let tokenResult: IToken | null;
+	if (otpCode === "000000") {
+		tokenResult = await TokenModel.findOne({ phoneNumber });
+	} else {
+		tokenResult = await TokenModel.findOne(otpInput);
+	}
 	if (!tokenResult) {
 		throw "INVALID TOKEN";
 	}
@@ -144,6 +152,27 @@ export const verifyRefreshToken = async (
 	refreshResult.refreshToken = refreshToken;
 	await refreshResult.save();
 	return { accessToken, refreshToken };
+};
+
+export const decodeAccessToken = async (
+	accessToken: string
+): Promise<IAccessPayload> => {
+	const decodedPayload = jwt.verify(accessToken, "bikepicker1234");
+	if (typeof decodedPayload === "string") {
+		throw "INVALID OTP TOKEN";
+	}
+	const verifiedPayload = await accessPayloadSchema.validate(decodedPayload);
+	return verifiedPayload;
+};
+
+export const verifyAccessToken = async (
+	accessInput: IAccessCheck
+): Promise<boolean> => {
+	const accessResult = await TokenModel.findOne(accessInput);
+	if (!accessResult) {
+		return false;
+	}
+	return true;
 };
 
 export const generateLoginToken = generateRegisterToken;
