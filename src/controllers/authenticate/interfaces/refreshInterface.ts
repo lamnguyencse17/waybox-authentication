@@ -1,13 +1,12 @@
 import * as yup from "yup";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface verifyOtpInput
-	extends yup.Asserts<typeof verifyOtpInputSchema> {}
+export interface refreshTokenInput
+	extends yup.Asserts<typeof refreshTokenSchema> {}
 
-export const verifyOtpInputSchema = yup.object({
+export const refreshTokenSchema = yup.object({
 	username: yup.string().required().defined().min(10),
-	otpCode: yup.string().required().defined().length(6),
-	otpToken: yup
+	refreshToken: yup
 		.string()
 		.required()
 		.defined()

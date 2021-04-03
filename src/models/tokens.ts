@@ -6,7 +6,7 @@ const TokenSchema: Schema = new Schema({
 	refreshToken: { type: String },
 	otpToken: { type: String },
 	otpCode: { type: String },
-	otpRandom: { type: String },
+	randomOtpText: { type: String },
 	phoneNumber: { type: String, required: true },
 });
 

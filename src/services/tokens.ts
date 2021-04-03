@@ -5,6 +5,9 @@ import {
 	otpTokenPayloadSchema,
 	IOtpCheck,
 	IOtpReturnedTokens,
+	IRefreshPayload,
+	RefreshPayloadSchema,
+	IRefreshCheck,
 } from "./interfaces/tokens";
 import jwt from "jsonwebtoken";
 
@@ -83,12 +86,9 @@ const generateRefreshToken = (phoneNumber: string): string => {
 export const verifyOtpToken = async (
 	otpInput: IOtpCheck
 ): Promise<IOtpReturnedTokens> => {
-	const { randomOtpText, phoneNumber, otpCode } = otpInput;
-	const tokenResult = await TokenModel.findOne({
-		otpRandom: randomOtpText,
-		phoneNumber,
-		otpCode,
-	});
+	const { phoneNumber } = otpInput;
+	const tokenResult = await TokenModel.findOne(otpInput);
+	console.log(tokenResult);
 	if (!tokenResult) {
 		throw "INVALID TOKEN";
 	}
@@ -106,8 +106,44 @@ export const decodeOtpToken = async (
 	if (typeof decodedPayload === "string") {
 		throw "INVALID OTP TOKEN";
 	}
-	const verifiedPayload = await otpTokenPayloadSchema.validate(decodedPayload);
+	const convertedPayload = {
+		...(decodedPayload as any),
+		randomOtpText: (decodedPayload as any).OTP_RANDOM_TOKEN,
+	};
+	delete convertedPayload.OTP_RANDOM_TOKEN;
+	const verifiedPayload = await otpTokenPayloadSchema.validate(
+		convertedPayload
+	);
 	return verifiedPayload;
+};
+
+export const decodeRefreshToken = async (
+	refreshToken: string
+): Promise<IRefreshPayload> => {
+	const decodedPayload = jwt.verify(refreshToken, "bikepicker1234");
+	if (typeof decodedPayload === "string") {
+		throw "INVALID OTP TOKEN";
+	}
+	const verifiedPayload = await RefreshPayloadSchema.validate(decodedPayload);
+	return verifiedPayload;
+};
+
+export const verifyRefreshToken = async (
+	refreshInput: IRefreshCheck
+): Promise<IOtpReturnedTokens> => {
+	const { phoneNumber } = refreshInput;
+	const refreshResult = await TokenModel.findOne({
+		refreshToken: refreshInput.refreshToken,
+		phoneNumber,
+	});
+	if (!refreshResult) {
+		throw "INVALID TOKEN";
+	}
+	const { accessToken, refreshToken } = generateReturnedTokens(phoneNumber);
+	refreshResult.accessToken = accessToken;
+	refreshResult.refreshToken = refreshToken;
+	await refreshResult.save();
+	return { accessToken, refreshToken };
 };
 
 export const generateLoginToken = generateRegisterToken;

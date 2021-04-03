@@ -1,11 +1,6 @@
 import { Request, Response } from "express";
 import { BAD_REQUEST, OK_RESPONSE } from "../../constants/response";
-import {
-	generateLoginToken,
-	verifyOtpToken,
-	decodeOtpToken,
-} from "../../services/tokens";
-import { loginUser } from "../../services/users";
+import { verifyOtpToken, decodeOtpToken } from "../../services/tokens";
 import {
 	verifyOtpInput,
 	verifyOtpInputSchema,
