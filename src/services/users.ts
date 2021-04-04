@@ -21,9 +21,11 @@ export const createNewUser = async (
 		throw "ERROR VALIDATING BCRYPT HASH";
 	}
 	try {
-		const user = await UserModel.create(validatedUserInput);
+		const user = new UserModel(validatedUserInput);
+		// const user = await UserModel.create(validatedUserInput);
 		const { password, ...pushData } = validatedUserInput;
 		await pushDataToManagement(pushData);
+		await user.save();
 		return user.toJSON();
 	} catch (err) {
 		console.error(err);
