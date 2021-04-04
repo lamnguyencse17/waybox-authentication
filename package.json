@@ -36,10 +36,7 @@
 		"lodash": "^4.17.20",
 		"mongoose": "^5.12.2",
 		"nanoid": "^3.1.22",
-		"passport": "^0.4.1",
-		"passport-jwt": "^4.0.0",
 		"pm2": "^4.5.4",
-		"redis": "^3.0.2",
 		"yup": "^0.32.9"
 	},
 	"devDependencies": {
@@ -48,21 +45,15 @@
 		"@types/eslint-config-prettier": "^6.11.0",
 		"@types/express": "^4.17.11",
 		"@types/jsonwebtoken": "^8.5.1",
-		"@types/morgan": "^1.9.2",
 		"@types/node": "^14.14.37",
-		"@types/passport": "^1.0.6",
-		"@types/passport-jwt": "^3.0.5",
-		"@types/redis": "^2.8.28",
 		"@typescript-eslint/eslint-plugin": "^4.20.0",
 		"@typescript-eslint/parser": "^4.20.0",
 		"eslint": "^7.23.0",
 		"eslint-config-prettier": "^7.2.0",
 		"eslint-plugin-prettier": "^3.3.1",
-		"morgan": "^1.10.0",
 		"nodemon": "^2.0.7",
 		"prettier": "^2.2.1",
 		"ts-node": "^9.1.1",
-		"typedoc": "^0.20.34",
 		"typescript": "^4.2.3"
 	}
 }
