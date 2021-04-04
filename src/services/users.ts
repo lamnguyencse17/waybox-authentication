@@ -2,8 +2,13 @@ import { loginInput } from "../controllers/authenticate/interfaces/loginInterfac
 import { registerInput } from "../controllers/authenticate/interfaces/registerInterface";
 import { IPlainUser } from "../models/interfaces/users";
 import UserModel from "../models/users";
-import { createUserInputSchema, createUserInput } from "./interfaces/users";
+import {
+	createUserInputSchema,
+	createUserInput,
+	userData,
+} from "./interfaces/users";
 import verifyPassword from "../utils/verifyPassword";
+import axios from "axios";
 
 export const createNewUser = async (
 	newUserInput: registerInput
@@ -17,6 +22,8 @@ export const createNewUser = async (
 	}
 	try {
 		const user = await UserModel.create(validatedUserInput);
+		const { password, ...pushData } = validatedUserInput;
+		await pushDataToManagement(pushData);
 		return user.toJSON();
 	} catch (err) {
 		console.error(err);
@@ -43,4 +50,14 @@ export const getUserFromPhoneNumber = async (
 		throw "NO USER FOUND";
 	}
 	return user;
+};
+
+export const pushDataToManagement = async (
+	pushData: userData
+): Promise<void> => {
+	if (process.env.ManagementURL === undefined) {
+		throw "Required URL Not Found";
+	}
+	const pushUserURL = `${process.env.ManagementURL}/admin/user`;
+	await axios.post(pushUserURL, pushData);
 };

@@ -29,3 +29,5 @@ export const createUserInputSchema = yup.object({
 	female: yup.boolean().required().defined(),
 	address: yup.string().required().defined().min(1),
 });
+
+export type userData = Omit<createUserInput, "password">;
