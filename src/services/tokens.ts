@@ -83,7 +83,7 @@ const generateRefreshToken = (phoneNumber: string): string => {
 			USER_ID: phoneNumber,
 		},
 		"bikepicker1234",
-		{ expiresIn: "300s" }
+		{ expiresIn: "30d" }
 	);
 };
 
