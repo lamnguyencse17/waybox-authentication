@@ -1,7 +1,7 @@
 import express from "express";
 import mainRouter from "./routers/router";
 import { initMongoose } from "./init";
-import { generateRegisterToken } from "./services/tokens";
+import { initTwilio } from "./services/twilio";
 import cors from "cors";
 import http from "http";
 
@@ -25,4 +25,5 @@ app.use("/", mainRouter);
 
 server.listen(port, async () => {
 	console.log("Running");
+	initTwilio();
 });
