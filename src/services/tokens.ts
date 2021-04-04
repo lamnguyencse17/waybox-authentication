@@ -14,6 +14,7 @@ import {
 } from "./interfaces/tokens";
 import jwt from "jsonwebtoken";
 import { IToken } from "../models/interfaces/tokens";
+import { sendMessage } from "./twilio";
 
 const generateRandomOtpText = async (): Promise<string> => await nanoid();
 
@@ -53,6 +54,7 @@ export const generateRegisterToken = async (
 		throw "GENERATE OTP TOKEN FAILED";
 	}
 	const otpToken = savedToken.otpToken;
+	sendMessage(phoneNumber, registerToken.otpCode);
 	console.log("SAVED TOKEN: ", otpToken);
 	return { otpToken };
 };
